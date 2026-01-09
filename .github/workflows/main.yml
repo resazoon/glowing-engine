@@ -5,25 +5,16 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Theos & ldid
+      - name: Setup Theos
         run: |
-          # Theos本体の取得
           git clone --recursive https://github.com/theos/theos.git ~/theos
-          
-          # 署名ツール(ldid)のインストール
           brew install ldid
-          
-          # Xcode内蔵SDKへのリンク作成
           mkdir -p ~/theos/sdks
           ln -s /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk ~/theos/sdks/iPhoneOS.sdk
-
       - name: Build
         run: |
           export THEOS=~/theos
-          # ビルド実行
           make package FINALPACKAGE=1 SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
-          
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
