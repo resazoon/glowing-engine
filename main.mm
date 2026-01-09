@@ -7,7 +7,7 @@
 @implementation MyESPView
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0); // 動作確認用の赤い四角
+    CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
     CGContextFillRect(context, CGRectMake(100, 100, 100, 100)); 
 }
 @end
